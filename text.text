@@ -1,0 +1,63 @@
+//deta get rq krala ganna one
+//get kiyanne data ganna one
+//post kiyanne data yanna one
+app.get("/",(req,res)=>{
+    Student.find().then(
+        (student)=>{
+            res.json(student)
+        }
+    ).catch(
+        ()=>{
+            res.json({
+                message:"data not found"
+            })
+        }
+    )
+})
+
+app.delete("/",(req,res)=>{
+    console.log(req.body)
+    res.json({
+        message:"this is the delete"
+    })
+})
+
+app.put("/",(req,res)=>{
+    console.log(req.body)
+    res.json({
+        message:"this is the put"
+    })
+})
+
+
+
+
+
+
+
+
+
+// meken thma api ewana req ewage data ganna one
+// ewa body ekata ganna one
+// ewa post ekata ganna one
+// schema kiynne sctrcture ekak
+app.post("/",(req,res)=>{
+  
+  // const use krnne wens wenne nathi verible ekkta
+  const student= new Student(req.body)
+//then kiynne hariyta wade wenna ona nisa dana code ekk
+  student.save().then(
+    ()=>{
+        res.json({
+            message:"data saved"
+        })
+    }
+  ).catch(
+    ()=>{
+        res.json({
+            message:"data not saved"
+        })
+    }
+  )
+})
+
