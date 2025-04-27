@@ -2,7 +2,8 @@ import express from 'express';
 import  User  from '../models/user.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-
+import dotenv from 'dotenv';
+dotenv.config();
 export function saveUser(req,res){
 
     if(req.body.UserType == "admin"){
@@ -75,7 +76,9 @@ export function loginUser(req,res){
                     isDisabled : user.isDisabled,
                     isEmailVerified : user.isEmailVerified
                 }
-                const token = jwt.sign(userData,"random1234")
+                const token = jwt.sign(userData, process.env.JWT_SKEY, {
+                    expiresIn: "1h"
+                })
                 res.json({
                     message: "Login success",
                     token: token,
