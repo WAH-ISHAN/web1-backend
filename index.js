@@ -11,7 +11,7 @@ dotenv.config();
 let app=express();
 
 
-mongoose.connect(process.env.MONGODB).then(
+mongoose.connect(process.env.MONGO_URL).then(
     () => console.log("connected to mongodb")
 ).catch(
     () => console.log("not connected to mongodb")
