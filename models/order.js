@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
 
-    orderID: {
+    OrderID: {
         type: String,
         required: true,
         unique: true 

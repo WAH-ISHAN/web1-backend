@@ -29,7 +29,7 @@ export function createOrder(req,res){
         OrderData.OrderID ="Order0001"
     }else{
         const lastOrder = lastBill[0];
-        const lastOrderID = lastOrder.orderID ;
+        const lastOrderID = lastOrder.OrderID ;
         const lastOrderNumber = lastOrderID.replace("Order", "");
         const lastOrderNumberInt = parseInt(lastOrderNumber);
         const newOrderNumberInt = lastOrderNumberInt + 1;

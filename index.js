@@ -6,11 +6,12 @@ import userRouter from "./router/userrouter.js";
 import productRouter from "./router/productrouter.js";
 import verifyjwt from "./middleware/auth.js";
 import orderRouter from "./router/orderrouter.js";
-
+import dotenv from "dotenv";
+dotenv.config();
 let app=express();
 
 
-mongoose.connect("mongodb+srv://admin:admin123@cluster0.18fozpb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0").then(
+mongoose.connect(process.env.MONGODB).then(
     () => console.log("connected to mongodb")
 ).catch(
     () => console.log("not connected to mongodb")
