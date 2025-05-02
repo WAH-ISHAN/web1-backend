@@ -7,9 +7,14 @@ import productRouter from "./router/productrouter.js";
 import verifyjwt from "./middleware/auth.js";
 import orderRouter from "./router/orderrouter.js";
 import dotenv from "dotenv";
+import cors from "cors";
 dotenv.config();
-let app=express();
 
+
+
+
+const app=express();
+app.use(cors())//cors police meken wenne api ekata access karanna puluwan wenna
 
 mongoose.connect(process.env.MONGO_URL).then(
     () => console.log("connected to mongodb")

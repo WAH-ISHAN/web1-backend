@@ -58,25 +58,26 @@ export function createOrder(req,res){
 })
 }
 export function getOrderlist(req, res) {
-    if (req.user) {
+    console.log(req.user);
+    if (!req.user) {
         return res.status(403).json({ message: "Unauthorized" });
     }
 
     if (req.user.UserType == "Admin") {
-        Order.find()
+        Orderz.find()
             .then((orders) => {
-                res.status(200).json(Orders);
+                res.status(200).json(orders);
             })
             .catch((error) => {
                 console.error("Error fetching orders:", error);
                 res.status(500).json({ message: "Internal server error", error });
             });
     } else {
-        Order.find({
+        Orderz.find({
             email:req.user.email
         }).then(
             (orders) => {
-                res.status(200).json(Orders);
+                res.status(200).json(orders);
             })
             .catch((error) => {
                 console.error("Error fetching orders:", error);

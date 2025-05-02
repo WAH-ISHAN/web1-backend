@@ -24,6 +24,7 @@ export function saveUser(req,res){
 
     const hashPassword = bcrypt.hashSync(req.body.password, 10);
     const user = new User({
+        
         email : req.body.email,
         FirstName : req.body.FirstName,
         LastName : req.body.LastName,
@@ -34,7 +35,8 @@ export function saveUser(req,res){
 
 
 
-    user.save().then(() => {
+    user.save().then((error) => {
+        console.log("User saved successfully", error);
         res.json({ message: "User saved" });
     }).catch((error) => {
         console.error("Error in saving user:", error);
@@ -47,13 +49,13 @@ export function saveUser(req,res){
 export function loginUser(req,res){
     const email = req.body.email;
     const password = req.body.password;
-    console.log(password);
+
 
     User.findOne({
         email : email
     })
     .then((user)=>{
-        console.log(user);
+        console.log(user)
         if(user == null){
             res.status(404).json({
                 message: "User not found"
@@ -76,12 +78,14 @@ export function loginUser(req,res){
                     isDisabled : user.isDisabled,
                     isEmailVerified : user.isEmailVerified
                 }
+
                 const token = jwt.sign(userData, process.env.JWT_SKEY, {
-                    expiresIn: "1h"
+                  
                 })
                 res.json({
                     message: "Login success",
                     token: token,
+                    user: userData
                 })
 
             }
