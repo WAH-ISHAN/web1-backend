@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 export function saveUser(req,res){
-
+    const password = req.body.password || req.body.Password;
     if(req.body.UserType == "admin"){
         if(req.UserType == null){
             res.status(403).json({
@@ -23,6 +23,7 @@ export function saveUser(req,res){
     }
 
     const hashPassword = bcrypt.hashSync(req.body.password, 10);
+
     const user = new User({
         
         email : req.body.email,
